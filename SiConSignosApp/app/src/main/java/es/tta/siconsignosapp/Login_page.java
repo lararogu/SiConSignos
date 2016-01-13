@@ -70,7 +70,7 @@ public class Login_page extends AppCompatActivity {
     public void sugerencias(){
         Toast.makeText(this,"Enviar sugerencias",Toast.LENGTH_SHORT).show();
     }
-    public void recuperar_passwd(){
+    public void recuperar_passwd(View v){
         Toast.makeText(this,"Enviar passwd",Toast.LENGTH_SHORT).show();
     }
 

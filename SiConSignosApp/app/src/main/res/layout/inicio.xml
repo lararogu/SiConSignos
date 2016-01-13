@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:id="@+id/inicio_text"
         android:layout_marginTop="40px">
 
     <TextView android:text="Ver traduccion a lenguaje de signos"
@@ -61,12 +62,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Manos"
+            android:id="@+id/button_manos"
             android:onClick="manos" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Video"
+            android:id="@+id/button_video"
             android:onClick="video" />
     </LinearLayout>
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:id="@+id/tests_layout"
+    tools:context="es.tta.siconsignosapp.Test">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250px"
+        android:orientation="vertical" >
+    <Button
+    android:id="@+id/button_basico"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Nivel basico"
+    android:visibility="invisible"
+    android:onClick="basico"/>
+
+    <Button
+        android:id="@+id/button_intermedio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nivel intermedio"
+        android:visibility="invisible"
+        android:onClick="intermedio"/>
+
+    <Button
+        android:id="@+id/button_avanzado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nivel avanzado"
+        android:visibility="invisible"
+        android:onClick="avanzado"/>
+
+        <TextView
+            android:id="@+id/texto_niveles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+</LinearLayout>
