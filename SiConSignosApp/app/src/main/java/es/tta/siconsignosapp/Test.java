@@ -25,7 +25,7 @@ public class Test extends AppCompatActivity {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.tests_layout);//buscamos el layout de la pantalla de inicio
 
-
+        //Dependiendo del nivel en el que este el usuario podra visualizar ciertos botones
         if (level==1){
             findViewById(R.id.button_basico).setVisibility(View.VISIBLE);
             TextView tv = (TextView)findViewById(R.id.texto_niveles);
@@ -48,7 +48,12 @@ public class Test extends AppCompatActivity {
     }
 
     public void basico(View v){
-        Toast.makeText(this, "basico", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "basico", Toast.LENGTH_SHORT).show();
+        //recoger las preguntas del servidor
+        //getBasico()
+        //i.putExtra pasar el objeto pregunta como clase serializable a la siguiente Activity
+        Intent i=new Intent(this,Pregunta.class);
+        startActivity(i);
     }
 
 }
