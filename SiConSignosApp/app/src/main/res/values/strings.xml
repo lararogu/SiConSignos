@@ -18,7 +18,8 @@
     <string name="title_activity_conectividad">Conectividad</string>
     <string name="title_activity_abc">ABC</string>
     <string name="title_activity_conversamos">Conversamos</string>
-    <string name="title_activity_test">Test</string>
+
     <string name="title_activity_pregunta">Pregunta</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>
