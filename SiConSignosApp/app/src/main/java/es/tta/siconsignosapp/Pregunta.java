@@ -1,5 +1,6 @@
 package es.tta.siconsignosapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,13 +13,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class Pregunta extends AppCompatActivity {
-
+    private Test test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pregunta);
 
+        Intent i=getIntent();
+        test=(Test) i.getSerializableExtra(TestActivity.TEST);
+
+        //coger valor de nextTest
+       // switch(test.tipo(nextTest)
+        //case letra:
         respuestaBasico();
+        //break;
     }
 //Funcion que pinta la pregunta con las 4 posibles respuestas en imagenes
     public void respuestaBasico(){
