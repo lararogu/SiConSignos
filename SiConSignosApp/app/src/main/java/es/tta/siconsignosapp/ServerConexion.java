@@ -12,6 +12,7 @@ import java.io.IOException;
  */
 public class ServerConexion {
 
+
     final ClientConexion conn=new ClientConexion();
 
     public String loginUsuario(String usuario,String passwd)throws IOException{

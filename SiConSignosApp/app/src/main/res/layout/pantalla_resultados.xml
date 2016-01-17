@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:id="@+id/pregunta_layout"
+    tools:context="es.tta.siconsignosapp.PantallaResultados">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50px"
+        android:layout_marginBottom="30px"
+        android:id="@+id/Resultados"
+        android:text="Resultados del test"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textSize="30px"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:id="@+id/RespuestasCorrectas"
+        android:textStyle="bold"
+        android:textSize="30px"
+         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fin del test"
+        android:layout_gravity="center"
+        android:onClick="finTest" />
+
+</LinearLayout>

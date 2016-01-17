@@ -10,9 +10,10 @@ public class Test implements Serializable{
     public String[] preguntas;
     public String[] tipo;
     public Respuesta[] respuestas;
+    public int length;
 
     public Test(String[]preguntas,String[]tipo,String[]respuesta1,String[]respuesta2,String[]respuesta3,String[]respuesta4,String[]correcta){
-        int length=preguntas.length;
+        this.length=preguntas.length;
         this.preguntas = new String[length];
         this.tipo = new String[length];
         respuestas = new Respuesta[length];
@@ -33,9 +34,9 @@ public class Test implements Serializable{
         public Respuesta(String res1,String res2,String res3,String res4,String correcta){
 
             respuesta1=res1;
-            respuesta2=res1;
-            respuesta3=res1;
-            respuesta4=res1;
+            respuesta2=res2;
+            respuesta3=res3;
+            respuesta4=res4;
             this.correcta=correcta;
         }
 

@@ -10,9 +10,30 @@
     tools:context="es.tta.siconsignosapp.Pregunta">
 
    <TextView
-       android:layout_width="match_parent"
+       android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_marginTop="50px"
-       android:id="@+id/test_pregunta" />
+       android:layout_marginBottom="30px"
+       android:id="@+id/test_pregunta"
+       android:textStyle="bold"
+       android:layout_gravity="center"
+       android:textSize="30px"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_parent"
+        android:layout_marginTop="30px"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_basico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Abandonar Test"
+        android:onClick=""/>
 
 </LinearLayout>

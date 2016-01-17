@@ -19,9 +19,11 @@ import java.io.IOException;
 
 public class TestActivity extends AppCompatActivity {
 
-    public static final String IMAGEURL="http://51.254.127.111/SiConSignos/imagenes/";
+
     public final static String TEST ="es.tta.test";
+    public final static String DATA ="es.tta.resultados";
     public Test test;
+    public DatosTest datosTest=new DatosTest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,6 @@ public class TestActivity extends AppCompatActivity {
         if (level==1){
             findViewById(R.id.button_intermedio).setEnabled(false);
             findViewById(R.id.button_avanzado).setEnabled(false);
-            TextView tv = (TextView)findViewById(R.id.texto_niveles);
-            tv.setText("Para acceder al siguiente nivel deberas alcanzar un 60% de aciertos");
 
         }
         else {
@@ -48,7 +48,7 @@ public class TestActivity extends AppCompatActivity {
         }
 
         TextView tv=(TextView)findViewById(R.id.texto_niveles);
-        tv.setText("Nivel basico\nNivel intermedio:Para acceder a este nivel deberas tener un 60% de aciertos en el nivel anterior\n" +
+        tv.setText("Nivel basico:preguntas sencillas sobre el abecedario y palabras mas comunes\nNivel intermedio:Para acceder a este nivel deberas tener un 60% de aciertos en el nivel anterior\n" +
                 "Nivel avanzado:Para acceder a este nivel deberas tener un 70% de aciertos en el nivel anterior");
 
 
@@ -57,11 +57,12 @@ public class TestActivity extends AppCompatActivity {
 
     public void basico(View v){
 
+        datosTest.nivel="basico";
         new AsyncTask<Void,Void,Test>(){
             @Override
             protected Test doInBackground(Void ... params){
                 ServerConexion conn=new ServerConexion();
-                Log.d("tag", "Lara:doInBackground");
+
                 try {
                   test=conn.getTest("basico");
                 }
@@ -74,11 +75,11 @@ public class TestActivity extends AppCompatActivity {
              return test;
             }
             @Override
-            protected void onPostExecute(Test result) {
-                Log.d("tag", "Lara3:" + result.preguntas[0]);
+            protected void onPostExecute(Test test) {
 
                 Intent i=new Intent(getApplicationContext(),Pregunta.class);
-                i.putExtra(TEST,result);
+                i.putExtra(TEST,test);
+                i.putExtra(DATA,datosTest);
                 startActivity(i);
             }
 

@@ -63,6 +63,8 @@ public class Login_page extends AppCompatActivity {
                      String result=null;
                         try {
                              result = conn.loginUsuario(usuario, pass);
+                            //llamar a bienvenida.php para coger datos del usuario(nivel,email...)
+                            //data=conn.datosUsuario(usuario) devuelve un json
                         }
                         catch(IOException e){
                         }

@@ -21,5 +21,6 @@
 
     <string name="title_activity_pregunta">Pregunta</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_pantalla_resultados">PantallaResultados</string>
 
 </resources>
