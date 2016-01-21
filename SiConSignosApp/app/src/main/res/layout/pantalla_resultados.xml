@@ -9,6 +9,18 @@
     android:id="@+id/pregunta_layout"
     tools:context="es.tta.siconsignosapp.PantallaResultados">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:background="@drawable/borders"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="50px"
+        android:paddingRight="20px"
+        android:paddingLeft="20px"
+        android:paddingTop="10px"
+        android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +30,7 @@
         android:text="Resultados del test"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:textSize="30px"/>
+        android:textSize="50px"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,6 +38,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
         android:id="@+id/RespuestasCorrectas"
+        android:layout_gravity="center"
         android:textStyle="bold"
         android:textSize="30px"
          />
@@ -34,7 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fin del test"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:onClick="finTest" />
 
+    </LinearLayout>
 </LinearLayout>

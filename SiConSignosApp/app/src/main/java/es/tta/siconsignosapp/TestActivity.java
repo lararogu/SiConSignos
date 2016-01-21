@@ -87,4 +87,41 @@ public class TestActivity extends AppCompatActivity {
 
     }
 
+
+    public void intermedio(View v){
+
+        datosTest.nivel="intermedio";
+        new AsyncTask<Void,Void,Test>(){
+            @Override
+            protected Test doInBackground(Void ... params){
+                ServerConexion conn=new ServerConexion();
+
+                try {
+                    test=conn.getTest("intermedio");
+                }
+                catch(IOException e){
+
+                }
+                catch(JSONException j){
+
+                }
+                return test;
+            }
+            @Override
+            protected void onPostExecute(Test test) {
+
+                Intent i=new Intent(getApplicationContext(),Pregunta.class);
+                i.putExtra(TEST,test);
+                i.putExtra(DATA,datosTest);
+                startActivity(i);
+            }
+
+        }.execute();
+
+    }
+
+
+
+
+
 }

@@ -24,8 +24,9 @@ public class ServerConexion {
     public Test getTest(String nivel)throws JSONException,IOException{
 
         JSONObject json=conn.getJson("devultest.php?nivel="+nivel);
-
+        Log.d("tag", "Lara3:" + json);
         int length=json.length();
+        Log.d("tag", "Lara3:" + length);
         String [] preguntas = new String[length];
         String [] tipo = new String[length];
         String[] respuesta1=new String[length];
