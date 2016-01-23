@@ -21,6 +21,12 @@ public class ServerConexion {
         return result;
     }
 
+    public JSONObject loginUsuarioJson(String usuario,String passwd) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("anloginusu.php?nousu=" + usuario + "&cont=" + passwd);
+        return result;
+    }
+
     public Test getTest(String nivel)throws JSONException,IOException{
 
         JSONObject json=conn.getJson("devultest.php?nivel="+nivel);

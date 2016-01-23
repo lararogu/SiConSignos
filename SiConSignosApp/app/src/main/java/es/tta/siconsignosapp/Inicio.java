@@ -1,6 +1,7 @@
 package es.tta.siconsignosapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,7 +22,10 @@ public class Inicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio);
-
+        SharedPreferences pref=getSharedPreferences("login_usu",MODE_PRIVATE);
+        String name=pref.getString(Login_page.NOMBRE,null);
+        String ape=pref.getString(Login_page.APELLIDO,null);
+        Toast.makeText(getApplicationContext(),"Bienvenido"+name+" "+ape,Toast.LENGTH_SHORT).show();
     }
 
 
