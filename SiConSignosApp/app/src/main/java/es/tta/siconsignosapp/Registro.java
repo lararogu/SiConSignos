@@ -21,9 +21,11 @@ public class Registro extends AppCompatActivity {
 
     public void registro(){
         EditText nick=(EditText)findViewById(R.id.nick);
-        EditText contrasena=(EditText)findViewById(R.id.contrasena);
-        //Comprobar que no existen en la base de datos
+        //Comprobar si ese nick existe en la BD
+
         //Si no existen añadir al usuario con todos sus datos
+        EditText contrasena=(EditText)findViewById(R.id.contrasena);
+
         EditText login=(EditText)findViewById(R.id.nombre);
         EditText passwd=(EditText)findViewById(R.id.apellido);
         EditText email=(EditText)findViewById(R.id.email);

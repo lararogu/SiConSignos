@@ -13,7 +13,7 @@
     <string name="email">Correo electronico</string>
     <string name="texto_estudio">En este apartado podras aprender el abecedario asi como enfrentarte a una serie de pruebas que te haran perfeccionar el lenguaje de signos.\n
     En el apartado ABC encontraras la traducción en imagenes de las diferentes letras del abecedario español.\n
-    En el apartado Conversamos encontraras una serie de tests que te permitiran evaluar tus conocimientos</string>
+    En el apartado Conversamos encontraras una serie de tests que te permitiran evalua\r tus conocimientos</string>
     <string name="title_activity_estudio">Estudio</string>
     <string name="title_activity_conectividad">Conectividad</string>
     <string name="title_activity_abc">ABC</string>
@@ -21,5 +21,9 @@
 
     <string name="title_activity_pregunta">Pregunta</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_pantalla_resultados">PantallaResultados</string>
+    <string name="no_camera">La camara no esta disponible</string>
+    <string name="no_app">No hay app disponible para sacar la foto</string>
+
 
 </resources>
