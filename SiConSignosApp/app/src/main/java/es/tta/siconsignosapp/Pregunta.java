@@ -78,7 +78,7 @@ public class Pregunta extends AppCompatActivity {
                 break;
 
             case "frase":
-
+                respuestaFrase();
                 break;
 
             case "foto":
@@ -214,6 +214,45 @@ public class Pregunta extends AppCompatActivity {
 
 
     //--------Funcion que pinta la pregunta con 3 posibles respuestas-----------------//
+
+    public void respuestaFrase() {
+
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TextView tv =(TextView)findViewById(R.id.test_pregunta);
+        tv.setText("¿" + test.preguntas[index] + "?");
+
+        LinearLayout layout_parent=(LinearLayout)findViewById(R.id.layout_parent);
+        layout_parent.removeAllViews();
+
+        LinearLayout layout_child1 = new LinearLayout(this);//Creamos un layout horizontal para la primera respuesta
+        layout_child1.setOrientation(LinearLayout.HORIZONTAL);
+
+        //layout_parent.setLayoutParams(params);
+       // ViewGroup.MarginLayoutParams margins = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        //margins.setMargins(15, 10, 15, 15);
+        layout_child1.setLayoutParams(params);
+        // layout_child1.setLayoutParams(margins);
+        LinearLayout layout_child2 = new LinearLayout(this);//Creamos un layout horizontal para la segunda respuesta
+        layout_child2.setOrientation(LinearLayout.HORIZONTAL);
+        layout_child2.setLayoutParams(params);
+        // layout_child2.setLayoutParams(margins);
+        //Recogemos las 4 imagenes que se van a mostrar en pantalla
+        final ImageView image1 = new ImageView(this);
+        final ImageView image2 = new ImageView(this);
+        final ImageView image3 = new ImageView(this);
+        final ImageView image4 = new ImageView(this);
+
+        Log.d("tag","Lara:"+test.respuestas[index].respuesta1);
+        layout_parent.addView(layout_child1);
+    }
+
+
+
+
+
+
+
+
 
 
     //----Funcion que muestra la pregunta con la opcion de sacar foto-----------------------//
