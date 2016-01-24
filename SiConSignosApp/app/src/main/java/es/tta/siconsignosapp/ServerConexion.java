@@ -26,6 +26,9 @@ public class ServerConexion {
         JSONObject result=conn.getJson("anloginusu.php?nousu=" + usuario + "&cont=" + passwd);
         return result;
     }
+    public void registraUsuario(String usuario,String apellido,String nombreUsuarui, String Contrasena, String email, String codchat) throws IOException {
+        conn.enviaRequest("registrausu.php?nombre=" + usuario + "&apellido=" + apellido+ "&nombreusuario=" + nombreUsuarui+ "&contrasena=" + Contrasena+ "&email=" + email+ "&codcha=" + codchat);
+    }
 
     public Test getTest(String nivel)throws JSONException,IOException{
 

@@ -22,15 +22,24 @@ public class Inicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio);
-        SharedPreferences pref=getSharedPreferences("login_usu",MODE_PRIVATE);
-        String name=pref.getString(Login_page.NOMBRE,null);
-        String ape=pref.getString(Login_page.APELLIDO,null);
-        Toast.makeText(getApplicationContext(),"Bienvenido"+name+" "+ape,Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+
     }
 
 
     public void estudio(View v){
         Intent i=new Intent(this,Estudio.class);
+        startActivity(i);
+    }
+    public void desconecta(View v){
+        SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+        SharedPreferences.Editor editor=pref.edit();
+        editor.clear();
+        editor.commit();
+        Intent i=new Intent(this,Login_page.class);
         startActivity(i);
     }
 

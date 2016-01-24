@@ -45,10 +45,7 @@ public class Login_page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.login_page);
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +57,7 @@ public class Login_page extends AppCompatActivity {
     }
 
 
-    public void login(View v)throws Exception{
+        public void login(View v)throws Exception{
         EditText login=(EditText)findViewById(R.id.login);
         EditText passwd=(EditText)findViewById(R.id.passwd);
 
@@ -105,6 +102,7 @@ public class Login_page extends AppCompatActivity {
                             editor.commit();
                             Intent i=new Intent(getApplicationContext(),Inicio.class);
                             startActivity(i);
+                            finish();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

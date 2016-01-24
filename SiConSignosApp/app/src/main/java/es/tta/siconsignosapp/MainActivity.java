@@ -1,5 +1,6 @@
 package es.tta.siconsignosapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,12 +37,23 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent actividadPrincipal = new Intent(MainActivity.this,Login_page.class);
                     startActivity(actividadPrincipal);
+                    finish();
 
                 }
             }
         };
         //ejecuto el thread
         timer.start();
+        SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+        Boolean yalog=pref.contains(Login_page.NOMBRE);
+        if(yalog){
+            String name=pref.getString(Login_page.NOMBRE,null);
+            String ape=pref.getString(Login_page.APELLIDO,null);
+            Toast.makeText(getApplicationContext(), "Bienvenido" + name + " " + ape, Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(this,Inicio.class);
+            startActivity(i);
+            finish();
+        }
     }
 
 
