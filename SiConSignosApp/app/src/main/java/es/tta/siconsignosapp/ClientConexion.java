@@ -32,7 +32,12 @@ public class ClientConexion {
         return conn;
 
     }
-
+    public void enviaRequest(String path) throws IOException {
+        HttpURLConnection conn = null;
+        conn = getConnection(path);
+        conn.setRequestMethod("GET");
+        conn.disconnect();
+    }
 
     //--------------------------------------------------------------------------------------------------------------//
     public JSONObject getJson(String path) throws IOException,JSONException{
