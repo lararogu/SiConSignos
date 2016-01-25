@@ -11,6 +11,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
+
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
         <Button
@@ -38,17 +39,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:id="@+id/layout_abc"
         android:layout_marginTop="40px">
 
         <TextView android:text="Vamos a aprender el abecedario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:id="@+id/texto_abc"
             android:textStyle="bold"
             android:textSize="70px" />
 
         <EditText
-            android:id="@+id/texto"
+            android:id="@+id/letra"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:hint="¿Que letra quieres aprender?"
@@ -58,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Buscar"
+            android:id="@+id/button_abc"
             android:onClick="letra" />
 
     </LinearLayout>

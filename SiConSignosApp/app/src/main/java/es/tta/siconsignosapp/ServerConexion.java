@@ -68,4 +68,19 @@ public class ServerConexion {
         //json.getString("pr");
         return test;
     }
+
+    public JSONObject updateLevel(String nivel,String nick)throws IOException,JSONException{
+
+        JSONObject result=conn.getJson("anuplevel.php?nivel=" + nivel + "&nick=" + nick);
+        return result;
+    }
+
+    public JSONObject buscaImagen(String letra)throws IOException,JSONException{
+
+        JSONObject result=conn.getJson("anbuscaimagenes.php?imagen=" + letra);
+        return result;
+    }
+
+
+
 }

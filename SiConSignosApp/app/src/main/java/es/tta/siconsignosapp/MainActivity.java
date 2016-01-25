@@ -34,26 +34,27 @@ public class MainActivity extends AppCompatActivity {
                     //Llamo a la nueva actividad startActivity recibe por parametro un objeto del tipo Intent
                     //El Intent recibibe por parametro el NAME de la actividad que vamos a invocar
                     //Es el mismo que colocamos en el manifiesto
-
-                    Intent actividadPrincipal = new Intent(MainActivity.this,Login_page.class);
-                    startActivity(actividadPrincipal);
-                    finish();
+                    SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+                    Boolean yalog=pref.contains(Login_page.NOMBRE);
+                    if(yalog){
+                        String name=pref.getString(Login_page.NOMBRE,null);
+                        String ape=pref.getString(Login_page.APELLIDO,null);
+                        Intent i=new Intent(getApplicationContext(),Inicio.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else {
+                        Intent actividadPrincipal = new Intent(MainActivity.this, Login_page.class);
+                        startActivity(actividadPrincipal);
+                        finish();
+                    }
 
                 }
             }
         };
         //ejecuto el thread
         timer.start();
-        SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
-        Boolean yalog=pref.contains(Login_page.NOMBRE);
-        if(yalog){
-            String name=pref.getString(Login_page.NOMBRE,null);
-            String ape=pref.getString(Login_page.APELLIDO,null);
-            Toast.makeText(getApplicationContext(), "Bienvenido" + name + " " + ape, Toast.LENGTH_SHORT).show();
-            Intent i=new Intent(this,Inicio.class);
-            startActivity(i);
-            finish();
-        }
+
     }
 
 

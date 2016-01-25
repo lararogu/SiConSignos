@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.widget.MediaController;
 import android.net.Uri;
@@ -33,6 +35,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -198,8 +201,12 @@ public class Pregunta extends AppCompatActivity {
 
         Display display = getWindowManager().getDefaultDisplay();
 
-        int width = display.getWidth(); // anchura pantalla
-        int height = display.getHeight();// altura pantalla
+       // int width = display.getWidth(); // anchura pantalla
+       // int height = display.getHeight();// altura pantalla
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
         LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width/ 3, ViewGroup.LayoutParams.MATCH_PARENT);
 
        image1.setLayoutParams(parms);
@@ -512,16 +519,164 @@ public class Pregunta extends AppCompatActivity {
 
               case "basico":
 
-                  if(((datosTest.correctas/datosTest.respondidas)*100)>=60)
-                      Toast.makeText(getApplicationContext(), "Nivel intermedio desbloqueado", Toast.LENGTH_SHORT).show();
+                  if(((datosTest.correctas/datosTest.respondidas)*100)>=60) {
+
+                      SharedPreferences pref= getSharedPreferences("login_usu", MODE_PRIVATE);
+                      String level=pref.getString(Login_page.NIVEL, null);
+                      final String nick=pref.getString(Login_page.NICK,null);
+
+                      if(level.equals("1")){//Aumentar nivel del usuario
+                          Toast.makeText(getApplicationContext(), "Nivel intermedio desbloqueado", Toast.LENGTH_SHORT).show();
+                          SharedPreferences.Editor editor=pref.edit();
+                          editor.putString(Login_page.NIVEL,"2");
+                          editor.commit();
+                          new AsyncTask<Void, JSONObject, JSONObject>() {
+
+                              @Override
+                              protected JSONObject doInBackground(Void... params) {
+                                  JSONObject result=null;
+                                  ServerConexion conn=new ServerConexion();
+                                  try {
+                                      result=conn.updateLevel("2", nick);
+                                  }
+                                  catch(IOException E){
+
+                                  }
+                                  catch(JSONException a){
+
+                                  }
+
+                                  return result;
+                              }
+
+                              @Override
+                              protected void onPostExecute(JSONObject result) {
+
+                                  try {
+                                      String resul = result.getString("subenivel");
+                                      if(resul.equals("false")){
+                                          Toast.makeText(getApplicationContext(),"Error al acceder al siguiente nivel",Toast.LENGTH_SHORT).show();
+                                      }
+                                      else{
+
+                                          Intent i=new Intent(getApplicationContext(),PantallaResultados.class);
+                                          i.putExtra(TestActivity.DATA,datosTest);
+                                          startActivity(i);
+
+                                      }
+                                  }
+                                  catch(JSONException a){
+
+                                  }
+
+
+                              }
+
+                          }.execute();
+
+                      }
+                      else{
+                          Intent i=new Intent(getApplicationContext(),PantallaResultados.class);
+                          i.putExtra(TestActivity.DATA,datosTest);
+                          startActivity(i);
+                      }
+                  }
+                  else{
+                      Intent i=new Intent(getApplicationContext(),PantallaResultados.class);
+                      i.putExtra(TestActivity.DATA,datosTest);
+                      startActivity(i);
+                  }
+
+
+                  break;
+
+
+              case "intermedio":
+
+                  if(((datosTest.correctas/datosTest.respondidas)*100)>=70) {
+
+                      SharedPreferences pref= getSharedPreferences("login_usu", MODE_PRIVATE);
+                      String level=pref.getString(Login_page.NIVEL, null);
+                      final String nick=pref.getString(Login_page.NICK,null);
+                      
+                      if(level.equals("2")){//Aumentar nivel del usuario
+                          Toast.makeText(getApplicationContext(), "Nivel avanzado desbloqueado", Toast.LENGTH_SHORT).show();
+                          SharedPreferences.Editor editor=pref.edit();
+                          editor.putString(Login_page.NIVEL,"3");
+                          editor.commit();
+                          new AsyncTask<Void, JSONObject, JSONObject>() {
+                              @Override
+                              protected void onPreExecute(){
+                                  pDialog = new ProgressDialog(Pregunta.this);
+                                  pDialog.setMessage("Cargando imagenes");
+                                  pDialog.show();
+                              }
+                              @Override
+                              protected JSONObject doInBackground(Void... params) {
+                                  JSONObject result=null;
+                                  ServerConexion conn=new ServerConexion();
+                                  try {
+                                      result=conn.updateLevel("3", nick);
+                                  }
+                                  catch(IOException E){
+
+                                  }
+                                  catch(JSONException a){
+
+                                  }
+
+                                  return result;
+                              }
+
+                              @Override
+                              protected void onPostExecute(JSONObject result) {
+
+                                  if( pDialog.isShowing()){
+                                      pDialog.dismiss();
+                                  }
+                                  try {
+                                      String resul = result.getString("subenivel");
+                                      if(resul.equals("false")){
+                                          Toast.makeText(getApplicationContext(),"Error al acceder al siguiente nivel",Toast.LENGTH_SHORT).show();
+                                      }
+                                      else{
+                                          Toast.makeText(getApplicationContext(),"Nivel cambiado",Toast.LENGTH_SHORT).show();
+                                          Intent i=new Intent(getApplicationContext(),PantallaResultados.class);
+                                          i.putExtra(TestActivity.DATA,datosTest);
+                                          startActivity(i);
+
+                                      }
+                                  }
+                                  catch(JSONException a){
+
+                                  }
+
+
+                              }
+
+                          }.execute();
+
+                      }
+                      else{
+                          Intent i=new Intent(getApplicationContext(),PantallaResultados.class);
+                          i.putExtra(TestActivity.DATA,datosTest);
+                          startActivity(i);
+                      }
+                  }
+                  else{
+                      Intent i=new Intent(getApplicationContext(),PantallaResultados.class);
+                      i.putExtra(TestActivity.DATA,datosTest);
+                      startActivity(i);
+                  }
+
+
+
+
+
 
                   break;
               }
 
-
-            Intent i=new Intent(this,PantallaResultados.class);
-            i.putExtra(TestActivity.DATA,datosTest);
-            startActivity(i);
 
         }
 
