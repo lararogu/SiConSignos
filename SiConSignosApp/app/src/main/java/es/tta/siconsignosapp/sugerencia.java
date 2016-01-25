@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ public class sugerencia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sugerencia);
     }
-    public void login(View v)throws Exception{
+    public void enviarsugerencia(View v)throws Exception{
         EditText asunto=(EditText)findViewById(R.id.asunto);
         EditText recom=(EditText)findViewById(R.id.recom);
 
@@ -33,6 +34,8 @@ public class sugerencia extends AppCompatActivity {
         if(!TextUtils.isEmpty(asunto.getText().toString())&&!TextUtils.isEmpty(recom.getText().toString())){
             final String asunt=asunto.getText().toString();
             final String recomendacion=recom.getText().toString();
+            Log.i("tag", "David:" + asunt);
+            Log.i("tag", "David:" + recomendacion);
             new AsyncTask<JSONObject,JSONObject,JSONObject>(){
                 @Override
                 protected JSONObject doInBackground(JSONObject... params) {
