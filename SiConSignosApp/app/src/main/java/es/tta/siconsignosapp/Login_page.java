@@ -41,7 +41,7 @@ public class Login_page extends AppCompatActivity {
     public final static String NICK="es.tta.nick";
     private final static String EMAIL="es.tta.email";
     private final static String CONTRASENA="es.tta.contrasena";
-    private final static String NIVEL="es.tta.nivel";
+    public final static String NIVEL="es.tta.nivel";
     private final static String NISK="es.tta.nisk";
     public  String dato;
 

@@ -31,18 +31,18 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.test);
 
         Intent i=getIntent();
-        int level = i.getIntExtra(Conversamos.LEVEL, 0);
+        String level = i.getStringExtra(Conversamos.LEVEL);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.tests_layout);//buscamos el layout de la pantalla de inicio
 
         //Dependiendo del nivel en el que este el usuario podra visualizar ciertos botones
-        if (level==1){
+        if (level.equals("1")){
             findViewById(R.id.button_intermedio).setEnabled(false);
             findViewById(R.id.button_avanzado).setEnabled(false);
 
         }
         else {
-            if (level==2){
+            if (level.equals("2")){
                 findViewById(R.id.button_avanzado).setEnabled(false);
             }
         }
@@ -120,6 +120,37 @@ public class TestActivity extends AppCompatActivity {
 
     }
 
+    public void avanzado(View v){
+
+        datosTest.nivel="avanzado";
+        new AsyncTask<Void,Void,Test>(){
+            @Override
+            protected Test doInBackground(Void ... params){
+                ServerConexion conn=new ServerConexion();
+
+                try {
+                    test=conn.getTest("avanzado");
+                }
+                catch(IOException e){
+
+                }
+                catch(JSONException j){
+
+                }
+                return test;
+            }
+            @Override
+            protected void onPostExecute(Test test) {
+
+                Intent i=new Intent(getApplicationContext(),Pregunta.class);
+                i.putExtra(TEST,test);
+                i.putExtra(DATA,datosTest);
+                startActivity(i);
+            }
+
+        }.execute();
+
+    }
 
 
 
