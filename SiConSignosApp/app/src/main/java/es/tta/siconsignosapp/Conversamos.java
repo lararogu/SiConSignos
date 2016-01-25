@@ -25,7 +25,7 @@ public class Conversamos extends AppCompatActivity {
         //Comprobar el nivel del usuario(1,2 o 3)
         //int level=compruebaNivel
         //datosUsuario.level
-        int level=2;
+        int level=3;
         i.putExtra(LEVEL,level);
         startActivity(i);
     }

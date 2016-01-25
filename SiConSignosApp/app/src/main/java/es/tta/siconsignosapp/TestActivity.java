@@ -120,6 +120,37 @@ public class TestActivity extends AppCompatActivity {
 
     }
 
+    public void avanzado(View v){
+
+        datosTest.nivel="avanzado";
+        new AsyncTask<Void,Void,Test>(){
+            @Override
+            protected Test doInBackground(Void ... params){
+                ServerConexion conn=new ServerConexion();
+
+                try {
+                    test=conn.getTest("avanzado");
+                }
+                catch(IOException e){
+
+                }
+                catch(JSONException j){
+
+                }
+                return test;
+            }
+            @Override
+            protected void onPostExecute(Test test) {
+
+                Intent i=new Intent(getApplicationContext(),Pregunta.class);
+                i.putExtra(TEST,test);
+                i.putExtra(DATA,datosTest);
+                startActivity(i);
+            }
+
+        }.execute();
+
+    }
 
 
 
