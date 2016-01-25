@@ -71,6 +71,17 @@ public class ServerConexion {
         JSONObject result=conn.getJson("anenviasugerencia.php?asunto=" + asunto + "&sugeren=" + sugerencia);
         return result;
     }
+    public JSONObject cambiaAConectado(String nick) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("anupdateEstadocon.php?nick=" + nick);
+        return result;
+    }
+    public JSONObject cambiaADesconectado(String nick) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("anupdateEstadodes.php?nick=" + nick);
+        return result;
+    }
+
 
     public Test getTest(String nivel)throws JSONException,IOException{
 

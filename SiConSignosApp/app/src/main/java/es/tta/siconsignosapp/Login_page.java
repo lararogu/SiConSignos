@@ -68,7 +68,7 @@ public class Login_page extends AppCompatActivity {
             new AsyncTask<JSONObject,JSONObject,JSONObject>(){
                 @Override
                 protected JSONObject doInBackground(JSONObject... params) {
-                     ServerConexion conn=new ServerConexion();
+                    ServerConexion conn=new ServerConexion();
                     JSONObject result=null;
                         try {
                              result = conn.loginUsuarioJson(usuario, pass);
@@ -85,6 +85,7 @@ public class Login_page extends AppCompatActivity {
                 @Override
                 protected void onPostExecute(JSONObject result) {
                     try {
+                        JSONObject resultadocon=null;
                         String resul=result.getString("nombre");
                         if(resul.equals("false")){
                             Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrectos",Toast.LENGTH_SHORT).show();
@@ -98,23 +99,18 @@ public class Login_page extends AppCompatActivity {
                             editor.putString(NIVEL,result.getString("nivel"));
                             editor.putString(NICK,result.getString("nick"));
                             editor.putString(NISK,result.getString("nisk"));
-                            editor.putString(EMAIL,result.getString("email"));
+                            editor.putString(EMAIL, result.getString("email"));
                             editor.commit();
-                            Intent i=new Intent(getApplicationContext(),Inicio.class);
-                            startActivity(i);
-                            finish();
+                            SharedPreferences prefer= getSharedPreferences("login_usu", MODE_PRIVATE);
+                            String minick=prefer.getString(Login_page.NICK, null);
+                            cambiacon(minick);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 }
 
             }.execute();
-
-
-
         }
         else{
             Toast.makeText(getApplicationContext(),"Falta por introducir algun campo",Toast.LENGTH_SHORT).show();
@@ -124,7 +120,42 @@ public class Login_page extends AppCompatActivity {
         }
 
     }
+    public void cambiacon(final String nick){
+        new AsyncTask<JSONObject,JSONObject,JSONObject>(){
+            @Override
+            protected JSONObject doInBackground(JSONObject... params) {
+                ServerConexion conn=new ServerConexion();
+                JSONObject result=null;
+                try {
+                    result = conn.cambiaAConectado(nick);
+                }
+                catch(JSONException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return result;
+            }
+            @Override
+            protected void onPostExecute(JSONObject result) {
+                try {
+                    String rasultadoconexion=result.getString("estado");
+                    if(rasultadoconexion.equals("true")){
+                        Intent i=new Intent(getApplicationContext(),Inicio.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Problemas al conectarse al Servidor",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
+        }.execute();
+
+    }
     public void registrarse(View v){
 
         Intent i=new Intent(this,Registro.class);
@@ -141,8 +172,26 @@ public class Login_page extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+    @Override
+    public void onBackPressed() {
+        new AsyncTask<JSONObject,JSONObject,JSONObject>(){
+            @Override
+            protected JSONObject doInBackground(JSONObject... params) {
+                ServerConexion conn=new ServerConexion();
+                JSONObject result=null;
+                SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+                String minick=pref.getString(Login_page.NICK, null);
+                try {
+                    result = conn.cambiaADesconectado(minick);
+                }
+                catch(JSONException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return result;
+            }
+        }.execute();
 
-
-
-
+    }
 }
