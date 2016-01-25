@@ -1,7 +1,6 @@
 package es.tta.siconsignosapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,62 +18,61 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class sugerencia extends AppCompatActivity {
+public class recuperaContra extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sugerencia);
+        setContentView(R.layout.activity_recupera_contra);
     }
-    public void enviarsugerencia(View v)throws Exception{
-        EditText asunto=(EditText)findViewById(R.id.asunto);
-        EditText recom=(EditText)findViewById(R.id.recom);
-
-        //Si ambos campos (LOGIN y PASSWD estan completados se comprueba si existe ese usuario
-        if(!TextUtils.isEmpty(asunto.getText().toString())&&!TextUtils.isEmpty(recom.getText().toString())){
-            final String asunt=asunto.getText().toString();
-            final String recomendacion=recom.getText().toString();
+    public void recupera(View v){
+        EditText email=(EditText)findViewById(R.id.email);
+        if(!TextUtils.isEmpty(email.getText().toString())) {
+            final String email1 = email.getText().toString();
             new AsyncTask<JSONObject,JSONObject,JSONObject>(){
                 @Override
                 protected JSONObject doInBackground(JSONObject... params) {
                     ServerConexion conn=new ServerConexion();
                     JSONObject result=null;
                     try {
-                        result = conn.enviasugerencia(asunt, recomendacion);
-                    }
-                    catch(JSONException e){
-                        e.printStackTrace();
+                        result=conn.recuperacontra(email1);
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    //llamar a bienvenida.php para coger datos del usuario(nivel,email...)
+                    //data=conn.datosUsuario(usuario) devuelve un json
                     return result;
                 }
                 @Override
-                protected void onPostExecute(JSONObject result) {
+                protected void onPostExecute(JSONObject resultado) {
                     try {
-                        String resul=result.getString("enviado");
-                        if(resul.equals("false")){
-                            Toast.makeText(getApplicationContext(),"Problemas al enviar la sugerencia",Toast.LENGTH_SHORT).show();
+                        String resul=resultado.getString("recuperado");
+                        Log.i("resultado",resul);
+                        if(resul.equals("noenviado")){
+                            Toast.makeText(getApplicationContext(), "Problemas al recuperar la contraseña", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(resul.equals("noencon")){
+                            Toast.makeText(getApplicationContext(), "Email no registrado", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(getApplicationContext(),"Sugerencia enviada",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Comprueba tu email para recuperar la contraseña",Toast.LENGTH_SHORT).show();
                             Intent i=new Intent(getApplicationContext(),Login_page.class);
                             startActivity(i);
                             finish();
                         }
-                    } catch (JSONException e) {
+                    }catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
             }.execute();
         }
         else{
-            Toast.makeText(getApplicationContext(), "Falta por introducir algun campo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Falta por introducir algun campo",Toast.LENGTH_SHORT).show();
         }
 
     }
+
 
 }

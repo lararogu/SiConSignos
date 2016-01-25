@@ -80,7 +80,15 @@
         <activity
             android:name=".sugerencia"
             android:label="@string/title_activity_sugerencia"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".recuperaContra"
+            android:label="@string/title_activity_recupera_contra"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".buscaLlama"
+            android:exported="false"></service>
     </application>
 
 </manifest>

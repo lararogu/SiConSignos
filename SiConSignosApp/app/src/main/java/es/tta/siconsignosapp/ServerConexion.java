@@ -26,9 +26,24 @@ public class ServerConexion {
         JSONObject result=conn.getJson("anloginusu.php?nousu=" + usuario + "&cont=" + passwd);
         return result;
     }
-    public JSONObject registraUsuario(String usuario,String apellido,String nombreUsuarui, String Contrasena, String email, String codchat) throws IOException, JSONException {
+    public JSONObject comprueballa(String nick) throws IOException, JSONException {
 
-        JSONObject result=conn.getJson("registrausu.php?nombre=" + usuario + "&apellido=" + apellido+ "&nombreusuario=" + nombreUsuarui+ "&contrasena=" + Contrasena+ "&email=" + email+ "&codcha=" + codchat);
+        JSONObject result=conn.getJson("anrecllama.php?minick=" + nick);
+        return result;
+    }
+    public JSONObject devuelveLlama(String niskcon) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("andevulllama.php?niskcon=" + niskcon);
+        return result;
+    }
+    public JSONObject registraUsuario(String usuario,String apellido,String nombreUsuarui, String contra, String email, String codchat) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("anregistrausu.php?nombre=" + usuario + "&apellido=" + apellido+ "&nombreusuario=" + nombreUsuarui+ "&contrasena=" + contra+ "&email=" + email+ "&codcha=" + codchat);
+        return result;
+    }
+    public JSONObject recuperacontra(String emai) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("andevuelveusu.php?emol=" + emai);
         return result;
     }
     public JSONObject enviasugerencia(String asunto,String sugerencia) throws IOException, JSONException {
@@ -39,10 +54,8 @@ public class ServerConexion {
 
     public Test getTest(String nivel)throws JSONException,IOException{
 
-        JSONObject json=conn.getJson("devultest.php?nivel="+nivel);
-        Log.d("tag", "Lara3:" + json);
+        JSONObject json=conn.getJson("devultest.php?nivel=" + nivel);
         int length=json.length();
-        Log.d("tag", "Lara3:" + length);
         String [] preguntas = new String[length];
         String [] tipo = new String[length];
         String[] respuesta1=new String[length];

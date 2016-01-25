@@ -3,6 +3,7 @@ package es.tta.siconsignosapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,11 +23,26 @@ public class Inicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio);
+        temporiza(1000);
     }
     @Override
     public void onPause() {
         super.onPause();
 
+    }
+    public void temporiza(int time){
+        new CountDownTimer(time, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+                String minick=pref.getString(Login_page.NICK, null);
+                llamadaRecibida llama=new llamadaRecibida();
+                llama.compruebaLlamada(minick,Inicio.this);
+            }
+            public void onFinish() {
+                temporiza(1000);
+            }
+        }.start();
     }
 
 

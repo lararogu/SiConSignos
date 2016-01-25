@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -42,15 +43,14 @@ public class Registro extends AppCompatActivity {
             final String email1 = email.getText().toString();
             final String contrasena1 = contrasena.getText().toString();
             final String nick1 = nick.getText().toString();
-            new AsyncTask<Void,Void,Void>(){
+            new AsyncTask<JSONObject,JSONObject,JSONObject>(){
                 @Override
-                protected Void doInBackground(Void... params) {
+                protected JSONObject doInBackground(JSONObject... params) {
                     ServerConexion conn=new ServerConexion();
                     JSONObject result=null;
                     try {
-                        String codigoChat=generateRandomString(12, 2);
-                        Toast.makeText(getApplicationContext(),codigoChat,Toast.LENGTH_SHORT).show();
-                        conn.registraUsuario(nombre1, apellido1,nick1,contrasena1,email1,"asdadsasdfgwe");
+                        String codigoChat=generateRandomString(10, 2);
+                        result=conn.registraUsuario(nombre1,apellido1,nick1,contrasena1,email1,codigoChat);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (Exception e) {
@@ -58,14 +58,24 @@ public class Registro extends AppCompatActivity {
                     }
                     //llamar a bienvenida.php para coger datos del usuario(nivel,email...)
                         //data=conn.datosUsuario(usuario) devuelve un json
-                return null;
+                return result;
                 }
                 @Override
-                protected void onPostExecute(Void resultado) {
-                    Toast.makeText(getApplicationContext(),"Bienvenido a SiConSignos, Logeate para continuar",Toast.LENGTH_SHORT).show();
-                    Intent i=new Intent(getApplicationContext(),Login_page.class);
-                    startActivity(i);
-                    finish();
+                protected void onPostExecute(JSONObject resultado) {
+                    try {
+                        String resul=resultado.getString("registro");
+                        if(resul.equals("false")){
+                            Toast.makeText(getApplicationContext(),"Ese nick ya se esta utilizando, prueba con otro",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Bienvenido a SiConSignos, Logeate para continuar",Toast.LENGTH_SHORT).show();
+                            Intent i=new Intent(getApplicationContext(),Login_page.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }.execute();
         }

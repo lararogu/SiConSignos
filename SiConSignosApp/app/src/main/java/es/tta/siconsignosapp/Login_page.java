@@ -1,9 +1,12 @@
 package es.tta.siconsignosapp;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +38,7 @@ public class Login_page extends AppCompatActivity {
 
     public final static String NOMBRE="es.tta.nombre";
     public final static String APELLIDO="es.tta.apellido";
-    private final static String NICK="es.tta.nick";
+    public final static String NICK="es.tta.nick";
     private final static String EMAIL="es.tta.email";
     private final static String CONTRASENA="es.tta.contrasena";
     private final static String NIVEL="es.tta.nivel";
@@ -53,11 +56,8 @@ public class Login_page extends AppCompatActivity {
                 sugerencias();
             }
         });
-
     }
-
-
-        public void login(View v)throws Exception{
+    public void login(View v)throws Exception{
         EditText login=(EditText)findViewById(R.id.login);
         EditText passwd=(EditText)findViewById(R.id.passwd);
 
@@ -134,9 +134,12 @@ public class Login_page extends AppCompatActivity {
     public void sugerencias(){
         Intent i=new Intent(getApplicationContext(),sugerencia.class);
         startActivity(i);
+        finish();
     }
     public void recuperar_passwd(View v){
-        Toast.makeText(this,"Enviar passwd",Toast.LENGTH_SHORT).show();
+        Intent i=new Intent(getApplicationContext(),recuperaContra.class);
+        startActivity(i);
+        finish();
     }
 
 

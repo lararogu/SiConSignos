@@ -25,6 +25,7 @@
     <string name="no_camera">La camara no esta disponible</string>
     <string name="no_app">No hay app disponible para sacar la foto</string>
     <string name="title_activity_sugerencia">sugerencia</string>
+    <string name="title_activity_recupera_contra">recuperaContra</string>
 
 
 </resources>
