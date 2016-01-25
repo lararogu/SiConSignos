@@ -14,7 +14,8 @@ import android.content.Intent;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    public final static String Llamadaon="es.tta.llamada";
+    public final static String contestado="es.tta.contestado";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
                     //Llamo a la nueva actividad startActivity recibe por parametro un objeto del tipo Intent
                     //El Intent recibibe por parametro el NAME de la actividad que vamos a invocar
                     //Es el mismo que colocamos en el manifiesto
+                    SharedPreferences preferenciasllamada= getSharedPreferences("llamadas",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=preferenciasllamada.edit();
+                    editor.putBoolean(Llamadaon, false);
+                    editor.putBoolean(contestado,false);
+                    editor.commit();
                     SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
                     Boolean yalog=pref.contains(Login_page.NOMBRE);
                     if(yalog){

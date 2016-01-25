@@ -19,11 +19,16 @@ import android.util.Log;
 
 public class Inicio extends AppCompatActivity {
     private TabHost tabHost;
+    private  Boolean yaLanzado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio);
-        temporiza(1000);
+        SharedPreferences pref= getSharedPreferences("llamadas",MODE_PRIVATE);
+        Boolean llama=pref.getBoolean(MainActivity.Llamadaon, false);
+        if(!llama) {
+            temporiza(1000);
+        }
     }
     @Override
     public void onPause() {
@@ -31,7 +36,7 @@ public class Inicio extends AppCompatActivity {
 
     }
     public void temporiza(int time){
-        new CountDownTimer(time, 1000) {
+        new CountDownTimer(time, 7000) {
 
             public void onTick(long millisUntilFinished) {
                 SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
@@ -40,7 +45,11 @@ public class Inicio extends AppCompatActivity {
                 llama.compruebaLlamada(minick,Inicio.this);
             }
             public void onFinish() {
-                temporiza(1000);
+                SharedPreferences pref= getSharedPreferences("llamadas",MODE_PRIVATE);
+                Boolean llama=pref.getBoolean(MainActivity.Llamadaon, false);
+                if(!llama) {
+                    temporiza(7000);
+                }
             }
         }.start();
     }

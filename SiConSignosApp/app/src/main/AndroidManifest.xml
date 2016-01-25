@@ -88,7 +88,12 @@
 
         <service
             android:name=".buscaLlama"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity
+            android:name=".llamando"
+            android:label="@string/title_activity_llamando"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -36,6 +36,26 @@ public class ServerConexion {
         JSONObject result=conn.getJson("andevulllama.php?niskcon=" + niskcon);
         return result;
     }
+    public JSONObject borrollamada(String minick) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("anborrallama.php?minick=" + minick);
+        return result;
+    }
+    public JSONObject compruebaSicontes(String minick,String nickdelotro) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("ancompllama.php?minick=" + minick+"&nickotro="+nickdelotro);
+        return result;
+    }
+    public JSONObject verConectados() throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("anconectados.php");
+        return result;
+    }
+    public JSONObject iniciaLlamada(String nickdelotro,String minisk) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("aninillama.php?nic="+nickdelotro+"&mini="+minisk);
+        return result;
+    }
     public JSONObject registraUsuario(String usuario,String apellido,String nombreUsuarui, String contra, String email, String codchat) throws IOException, JSONException {
 
         JSONObject result=conn.getJson("anregistrausu.php?nombre=" + usuario + "&apellido=" + apellido+ "&nombreusuario=" + nombreUsuarui+ "&contrasena=" + contra+ "&email=" + email+ "&codcha=" + codchat);

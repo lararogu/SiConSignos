@@ -42,7 +42,7 @@ public class Login_page extends AppCompatActivity {
     private final static String EMAIL="es.tta.email";
     private final static String CONTRASENA="es.tta.contrasena";
     public final static String NIVEL="es.tta.nivel";
-    private final static String NISK="es.tta.nisk";
+    public final static String NISK="es.tta.nisk";
     public  String dato;
 
     @Override

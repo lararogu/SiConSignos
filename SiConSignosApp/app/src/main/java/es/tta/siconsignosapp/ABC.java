@@ -137,7 +137,7 @@ public class ABC extends AppCompatActivity {
             Intent i = new Intent(this,ABC.class);
             startActivity(i);
         } else {
-            Intent i = new Intent(this,Inicio.class);
+            Intent i = new Intent(this,Estudio.class);
             startActivity(i);
         }
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:id="@+id/layoutconect"
     android:gravity="center_horizontal"
     tools:context="es.tta.siconsignosapp.Conectividad">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -37,8 +38,9 @@
         android:layout_height="wrap_content"
         android:text="Mostrar usuarios conectados"
         android:gravity="center"
+        android:id="@+id/botonconectados"
         android:layout_marginTop="40px"
-        android:onClick="estudio"/>
+        android:onClick="muestraconectados"/>
 
 
 
