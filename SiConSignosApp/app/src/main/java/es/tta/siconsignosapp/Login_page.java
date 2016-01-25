@@ -132,7 +132,8 @@ public class Login_page extends AppCompatActivity {
     }
 
     public void sugerencias(){
-        Toast.makeText(this,"Enviar sugerencias",Toast.LENGTH_SHORT).show();
+        Intent i=new Intent(getApplicationContext(),sugerencia.class);
+        startActivity(i);
     }
     public void recuperar_passwd(View v){
         Toast.makeText(this,"Enviar passwd",Toast.LENGTH_SHORT).show();

@@ -33,7 +33,6 @@
             android:id="@+id/apellido"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:password="true"
             android:hint="Introduce apellido"
             />
 
@@ -43,7 +42,6 @@
             android:id="@+id/nick"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:password="true"
             android:hint="Introduce nick"
             />
 
@@ -63,7 +61,6 @@
             android:id="@+id/email"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:password="true"
             android:hint="Introduce email"
             />
 

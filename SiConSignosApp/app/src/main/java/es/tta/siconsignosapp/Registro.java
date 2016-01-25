@@ -50,7 +50,7 @@ public class Registro extends AppCompatActivity {
                     try {
                         String codigoChat=generateRandomString(12, 2);
                         Toast.makeText(getApplicationContext(),codigoChat,Toast.LENGTH_SHORT).show();
-                        conn.registraUsuario(nombre1, apellido1,nick1,contrasena1,email1,codigoChat);
+                        conn.registraUsuario(nombre1, apellido1,nick1,contrasena1,email1,"asdadsasdfgwe");
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (Exception e) {
@@ -62,7 +62,7 @@ public class Registro extends AppCompatActivity {
                 }
                 @Override
                 protected void onPostExecute(Void resultado) {
-                    Toast.makeText(getApplicationContext(),"Bienvenido a SiConSignos",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Bienvenido a SiConSignos, Logeate para continuar",Toast.LENGTH_SHORT).show();
                     Intent i=new Intent(getApplicationContext(),Login_page.class);
                     startActivity(i);
                     finish();

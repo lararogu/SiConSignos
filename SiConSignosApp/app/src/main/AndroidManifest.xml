@@ -76,6 +76,10 @@
         <activity
             android:name=".PantallaResultados"
             android:label="@string/title_activity_pantalla_resultados"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".sugerencia"
+            android:label="@string/title_activity_sugerencia"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
