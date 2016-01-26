@@ -71,6 +71,11 @@ public class ServerConexion {
         JSONObject result=conn.getJson("anenviasugerencia.php?asunto=" + asunto + "&sugeren=" + sugerencia);
         return result;
     }
+    public JSONObject buscaVideo(String video)throws IOException,JSONException{
+
+        JSONObject result=conn.getJson("anbuscavideos.php?video=" + video);
+        return result;
+    }
     public JSONObject cambiaAConectado(String nick) throws IOException, JSONException {
 
         JSONObject result=conn.getJson("anupdateEstadocon.php?nick=" + nick);

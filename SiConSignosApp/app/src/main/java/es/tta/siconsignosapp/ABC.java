@@ -140,7 +140,5 @@ public class ABC extends AppCompatActivity {
             Intent i = new Intent(this,Estudio.class);
             startActivity(i);
         }
-
-
     }
 }

@@ -85,7 +85,6 @@ public class Login_page extends AppCompatActivity {
                 @Override
                 protected void onPostExecute(JSONObject result) {
                     try {
-                        JSONObject resultadocon=null;
                         String resul=result.getString("nombre");
                         if(resul.equals("false")){
                             Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrectos",Toast.LENGTH_SHORT).show();
@@ -103,7 +102,11 @@ public class Login_page extends AppCompatActivity {
                             editor.commit();
                             SharedPreferences prefer= getSharedPreferences("login_usu", MODE_PRIVATE);
                             String minick=prefer.getString(Login_page.NICK, null);
-                            cambiacon(minick);
+                            CambiaEstados cambia=new CambiaEstados();
+                            cambia.cambiacon(minick);
+                            Intent i=new Intent(getApplicationContext(),Inicio.class);
+                            startActivity(i);
+                            finish();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -118,42 +121,6 @@ public class Login_page extends AppCompatActivity {
 
 
         }
-
-    }
-    public void cambiacon(final String nick){
-        new AsyncTask<JSONObject,JSONObject,JSONObject>(){
-            @Override
-            protected JSONObject doInBackground(JSONObject... params) {
-                ServerConexion conn=new ServerConexion();
-                JSONObject result=null;
-                try {
-                    result = conn.cambiaAConectado(nick);
-                }
-                catch(JSONException e){
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return result;
-            }
-            @Override
-            protected void onPostExecute(JSONObject result) {
-                try {
-                    String rasultadoconexion=result.getString("estado");
-                    if(rasultadoconexion.equals("true")){
-                        Intent i=new Intent(getApplicationContext(),Inicio.class);
-                        startActivity(i);
-                        finish();
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),"Problemas al conectarse al Servidor",Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }.execute();
 
     }
     public void registrarse(View v){

@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
                     Boolean yalog=pref.contains(Login_page.NOMBRE);
                     if(yalog){
-                        String name=pref.getString(Login_page.NOMBRE,null);
-                        String ape=pref.getString(Login_page.APELLIDO,null);
                         Intent i=new Intent(getApplicationContext(),Inicio.class);
                         startActivity(i);
                         finish();
