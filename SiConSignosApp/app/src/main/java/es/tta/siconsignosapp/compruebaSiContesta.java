@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -55,6 +56,9 @@ public class compruebaSiContesta {
                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                             c.startActivity(intent);
                             ((Activity)c).finish();
+                            SharedPreferences preferenciasllamada= c.getSharedPreferences("llamadas", c.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=preferenciasllamada.edit();
+                            editor.putBoolean(MainActivity.Llamadaon, false);
                         }
                         SharedPreferences preferenciasllamada= c.getSharedPreferences("llamadas", c.MODE_PRIVATE);
                         SharedPreferences.Editor editor=preferenciasllamada.edit();
@@ -69,5 +73,23 @@ public class compruebaSiContesta {
                 }
             }
         }.execute();
+    }
+    public void temporiza(int time,final Context c){
+        new CountDownTimer(time, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                SharedPreferences pref= c.getSharedPreferences("login_usu",c.MODE_PRIVATE);
+                String minick=pref.getString(Login_page.NICK, null);
+                llamadaRecibida llama=new llamadaRecibida();
+                llama.compruebaLlamada(minick,c);
+            }
+            public void onFinish() {
+                SharedPreferences pref= c.getSharedPreferences("llamadas",c.MODE_PRIVATE);
+                Boolean llama=pref.getBoolean(MainActivity.Llamadaon, false);
+                if(!llama) {
+                    temporiza(1000,c);
+                }
+            }
+        }.start();
     }
 }

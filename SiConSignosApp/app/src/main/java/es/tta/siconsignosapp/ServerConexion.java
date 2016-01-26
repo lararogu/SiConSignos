@@ -86,6 +86,11 @@ public class ServerConexion {
         JSONObject result=conn.getJson("anupdateEstadodes.php?nick=" + nick);
         return result;
     }
+    public JSONObject reseteallamada(String nick) throws IOException, JSONException {
+
+        JSONObject result=conn.getJson("anreinillama.php?mini=" + nick);
+        return result;
+    }
 
 
     public Test getTest(String nivel)throws JSONException,IOException{

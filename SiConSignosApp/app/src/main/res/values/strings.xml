@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SiConSignosApp</string>
+    <string name="app_name">SiConSignos</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login_page">Login_page</string>
     <string name="title_activity_inicio">Inicio</string>

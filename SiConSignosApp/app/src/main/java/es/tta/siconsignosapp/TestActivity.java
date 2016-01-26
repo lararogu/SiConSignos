@@ -1,5 +1,6 @@
 package es.tta.siconsignosapp;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -52,7 +53,20 @@ public class TestActivity extends AppCompatActivity {
                 "Nivel avanzado:Para acceder a este nivel deberas tener un 70% de aciertos en el nivel anterior");
 
 
-
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
+        Boolean llama=prefe.getBoolean(MainActivity.Llamadaon, false);
+        if(!llama) {
+            compruebaSiContesta compu=new compruebaSiContesta();
+            compu.temporiza(1000, TestActivity.this);
+        }
+        CambiaEstados reinilla=new CambiaEstados();
+        SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+        String minick=pref.getString(Login_page.NICK, null);
+        reinilla.reinicillama(TestActivity.this, minick);
     }
 
     public void basico(View v){

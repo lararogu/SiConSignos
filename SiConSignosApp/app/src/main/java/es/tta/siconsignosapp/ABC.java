@@ -38,7 +38,20 @@ public class ABC extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.abc);
-
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
+        Boolean llama=prefe.getBoolean(MainActivity.Llamadaon, false);
+        if(!llama) {
+            compruebaSiContesta compu=new compruebaSiContesta();
+            compu.temporiza(1000, ABC.this);
+        }
+        CambiaEstados reinilla=new CambiaEstados();
+        SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+        String minick=pref.getString(Login_page.NICK, null);
+        reinilla.reinicillama(ABC.this, minick);
     }
     public void inicio(View v){
         Intent i=new Intent(this,Inicio.class);

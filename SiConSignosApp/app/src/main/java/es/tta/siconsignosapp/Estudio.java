@@ -1,6 +1,7 @@
 package es.tta.siconsignosapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,9 +16,29 @@ public class Estudio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.estudio);
-
     }
-
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
+        Boolean llama=prefe.getBoolean(MainActivity.Llamadaon, true);
+        if(!llama) {
+            compruebaSiContesta compu=new compruebaSiContesta();
+            compu.temporiza(1000, Estudio.this);
+        }
+        CambiaEstados reinilla=new CambiaEstados();
+        SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+        String minick=pref.getString(Login_page.NICK, null);
+        reinilla.reinicillama(Estudio.this, minick);
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        SharedPreferences preferenciasllamada= getSharedPreferences("llamadas", MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferenciasllamada.edit();
+        editor.putBoolean(MainActivity.Llamadaon,true);
+        editor.commit();
+    }
     public void inicio(View v){
         Intent i=new Intent(this,Inicio.class);
         startActivity(i);

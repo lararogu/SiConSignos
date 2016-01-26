@@ -112,6 +112,9 @@ public class llamadaRecibida {
                         Uri uri= Uri.parse(path);
                         Intent intent=new Intent(Intent.ACTION_VIEW,uri);
                         c.startActivity(intent);
+                        SharedPreferences preferenciasllamada= c.getSharedPreferences("llamadas", c.MODE_PRIVATE);
+                        SharedPreferences.Editor editor=preferenciasllamada.edit();
+                        editor.putBoolean(MainActivity.Llamadaon, false);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
