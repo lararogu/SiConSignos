@@ -1,5 +1,6 @@
 package es.tta.siconsignosapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,6 +56,8 @@ public class compruebaSiContesta {
                             Uri uri = Uri.parse(path);
                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                             c.startActivity(intent);
+                            
+
                         }
                         SharedPreferences preferenciasllamada= c.getSharedPreferences("llamadas", c.MODE_PRIVATE);
                         SharedPreferences.Editor editor=preferenciasllamada.edit();
