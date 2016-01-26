@@ -1,5 +1,6 @@
 package es.tta.siconsignosapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,8 +18,6 @@ import java.io.IOException;
  * Created by David on 25/01/2016.
  */
 public class compruebaSiContesta {
-
-
     public void compruebasi(final String minick,final String nickotro, final Context c){
         new AsyncTask<JSONObject,JSONObject,JSONObject>(){
             @Override
@@ -55,6 +54,7 @@ public class compruebaSiContesta {
                             Uri uri = Uri.parse(path);
                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                             c.startActivity(intent);
+                            ((Activity)c).finish();
                         }
                         SharedPreferences preferenciasllamada= c.getSharedPreferences("llamadas", c.MODE_PRIVATE);
                         SharedPreferences.Editor editor=preferenciasllamada.edit();
