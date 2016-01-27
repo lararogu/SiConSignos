@@ -41,6 +41,10 @@ public class compruebaSiContesta {
                 try {
                     String resul=result.getString("contesta");
                     if(resul.equals("colgado")){
+                        SharedPreferences preferenciasllamada= c.getSharedPreferences("llamadas", c.MODE_PRIVATE);
+                        SharedPreferences.Editor editor=preferenciasllamada.edit();
+                        editor.putBoolean(MainActivity.contestado, true);
+                        editor.commit();
                         Toast.makeText(c, "El usuario ha colgado", Toast.LENGTH_SHORT).show();
                         Intent i=new Intent(c,Conectividad.class);
                         c.startActivity(i);
@@ -75,7 +79,7 @@ public class compruebaSiContesta {
         }.execute();
     }
     public void temporiza(int time,final Context c){
-        new CountDownTimer(time, 1000) {
+        new CountDownTimer(time, 7000) {
 
             public void onTick(long millisUntilFinished) {
                 SharedPreferences pref= c.getSharedPreferences("login_usu",c.MODE_PRIVATE);
@@ -87,7 +91,7 @@ public class compruebaSiContesta {
                 SharedPreferences pref= c.getSharedPreferences("llamadas",c.MODE_PRIVATE);
                 Boolean llama=pref.getBoolean(MainActivity.Llamadaon, false);
                 if(!llama) {
-                    temporiza(1000,c);
+                    temporiza(7000,c);
                 }
             }
         }.start();

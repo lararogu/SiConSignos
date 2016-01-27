@@ -133,7 +133,7 @@ public class Conectividad extends AppCompatActivity {
                             int height = size.y;
                             RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (height / result.length()) - 60);
                             relative[i].setLayoutParams(relativeParams);
-                            relative[i].setBackgroundResource(R.drawable.logousuario);
+                            relative[i].setBackgroundResource(R.drawable.logocara);
                             relative[i].addView(usu[i]);
                             layout_parent.addView(relative[i]);
                         }
@@ -146,24 +146,14 @@ public class Conectividad extends AppCompatActivity {
                 }
             }
         }.execute();
-        Button boton=new Button(this);
-        boton.setText("Refrescar Conectados");
-        boton.setGravity(Gravity.END);
-        layout_parent.addView(boton);
-        boton.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    muestraconectados(v);
-            }
-            });
     }
     public void llama(final String nick,final String codchat){
 
-        new AsyncTask<JSONObject,JSONObject,JSONObject>(){
+        new AsyncTask<JSONObject,JSONObject,JSONObject>() {
             @Override
             protected JSONObject doInBackground(JSONObject... params) {
-                ServerConexion conn=new ServerConexion();
-                JSONObject result=null;
+                ServerConexion conn = new ServerConexion();
+                JSONObject result = null;
                 try {
                     result = conn.iniciaLlamada(nick,codchat);
                 }

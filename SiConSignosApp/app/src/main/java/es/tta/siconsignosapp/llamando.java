@@ -18,7 +18,19 @@ public class llamando extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llamando);
-        temporiza(7000);
+        temporiza(1000);
+        SharedPreferences preferenciasllamada= getSharedPreferences("llamadas", MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferenciasllamada.edit();
+        editor.putBoolean(MainActivity.contestado, false);
+        editor.commit();
+    }
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        SharedPreferences preferenciasllamada= getSharedPreferences("llamadas", MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferenciasllamada.edit();
+        editor.putBoolean(MainActivity.contestado, false);
+        editor.commit();
     }
     public void temporiza(int time){
         new CountDownTimer(time, 1000) {
@@ -32,7 +44,11 @@ public class llamando extends AppCompatActivity {
                 contes.compruebasi(minick,nickotro ,llamando.this);
             }
             public void onFinish() {
-                temporiza(7000);
+                SharedPreferences pref = getSharedPreferences("llamadas", MODE_PRIVATE);
+                Boolean colgado = pref.getBoolean(MainActivity.contestado, false);
+                if(!colgado) {
+                    temporiza(1000);
+                }
             }
         }.start();
     }
