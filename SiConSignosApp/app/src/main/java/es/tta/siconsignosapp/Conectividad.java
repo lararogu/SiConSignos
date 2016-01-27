@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -31,7 +32,32 @@ public class Conectividad extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.conectividad);
-
+        SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
+        Boolean llama=prefe.getBoolean(MainActivity.Llamadaon, false);
+        if(!llama) {
+            compruebaSiContesta compu=new compruebaSiContesta();
+            compu.temporiza(1000, Conectividad.this);
+        }
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
+        SharedPreferences.Editor editor=prefe.edit();
+        editor.putBoolean(MainActivity.Llamadaon,false);
+        editor.commit();
+        compruebaSiContesta compu=new compruebaSiContesta();
+        compu.temporiza(1000, Conectividad.this);
+        CambiaEstados reinilla=new CambiaEstados();
+        SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+        String minick=pref.getString(Login_page.NICK, null);
+        reinilla.reinicillama(Conectividad.this, minick);
+    }
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        compruebaSiContesta compu=new compruebaSiContesta();
+        compu.temporiza(1000, Conectividad.this);
     }
     public void inicio(View v){
         Intent i=new Intent(this,Inicio.class);
@@ -120,6 +146,16 @@ public class Conectividad extends AppCompatActivity {
                 }
             }
         }.execute();
+        Button boton=new Button(this);
+        boton.setText("Refrescar Conectados");
+        boton.setGravity(Gravity.END);
+        layout_parent.addView(boton);
+        boton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    muestraconectados(v);
+            }
+            });
     }
     public void llama(final String nick,final String codchat){
 

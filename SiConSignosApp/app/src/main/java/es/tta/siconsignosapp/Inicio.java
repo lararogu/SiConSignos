@@ -47,38 +47,42 @@ public class Inicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio);
-        SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
-        Boolean llama=prefe.getBoolean(MainActivity.Llamadaon, false);
         SharedPreferences prefer= getSharedPreferences("login_usu", MODE_PRIVATE);
         String minick=prefer.getString(Login_page.NICK, null);
         CambiaEstados cambia=new CambiaEstados();
         cambia.cambiacon(minick);
+        SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
+        Boolean llama=prefe.getBoolean(MainActivity.Llamadaon, false);
         if(!llama) {
-            temporiza(1000);
+            compruebaSiContesta compu=new compruebaSiContesta();
+            compu.temporiza(1000, Inicio.this);
         }
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
+        SharedPreferences.Editor editor=prefe.edit();
+        editor.putBoolean(MainActivity.Llamadaon,false);
+        editor.commit();
+            compruebaSiContesta compu=new compruebaSiContesta();
+            compu.temporiza(1000, Inicio.this);
+        CambiaEstados reinilla=new CambiaEstados();
+        SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+        String minick=pref.getString(Login_page.NICK, null);
+        reinilla.reinicillama(Inicio.this, minick);
+    }
+    @Override
+    public void onRestart(){
+        super.onRestart();
+            compruebaSiContesta compu=new compruebaSiContesta();
+            compu.temporiza(1000, Inicio.this);
     }
     @Override
     public void onPause() {
         super.onPause();
     }
-    public void temporiza(int time){
-        new CountDownTimer(time, 7000) {
 
-            public void onTick(long millisUntilFinished) {
-                SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
-                String minick=pref.getString(Login_page.NICK, null);
-                llamadaRecibida llama=new llamadaRecibida();
-                llama.compruebaLlamada(minick,Inicio.this);
-            }
-            public void onFinish() {
-                SharedPreferences pref= getSharedPreferences("llamadas",MODE_PRIVATE);
-                Boolean llama=pref.getBoolean(MainActivity.Llamadaon, false);
-                if(!llama) {
-                    temporiza(7000);
-                }
-            }
-        }.start();
-    }
 
 
     public void estudio(View v){

@@ -28,10 +28,11 @@ public class llamando extends AppCompatActivity {
                 compruebaSiContesta contes=new compruebaSiContesta();
                 Intent i=getIntent();
                 String nickotro=i.getStringExtra("nick");
+                Log.i("variable1",nickotro);
                 contes.compruebasi(minick,nickotro ,llamando.this);
             }
             public void onFinish() {
-                    temporiza(7000);
+                temporiza(7000);
             }
         }.start();
     }
@@ -39,6 +40,6 @@ public class llamando extends AppCompatActivity {
     public void onBackPressed() {
             Intent i = new Intent(this,Conectividad.class);
             startActivity(i);
-        finish();
+            finish();
     }
 }

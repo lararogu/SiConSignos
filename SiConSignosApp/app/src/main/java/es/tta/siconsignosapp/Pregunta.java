@@ -811,7 +811,7 @@ public void showImage(){
             });
             Button button2=new Button(context);
             button2.setText("Suspendido");
-            button1.setOnClickListener(new View.OnClickListener() {
+            button2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     checkRespuesta("Suspendido");
@@ -890,7 +890,7 @@ public void showImage(){
         });
         Button button2=new Button(context);
         button2.setText("Suspendido");
-        button1.setOnClickListener(new View.OnClickListener() {
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkRespuesta("Suspendido");

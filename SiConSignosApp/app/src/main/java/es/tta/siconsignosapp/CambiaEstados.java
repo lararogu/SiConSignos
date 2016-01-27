@@ -49,4 +49,22 @@ public class CambiaEstados {
             }
         }.execute();
     }
+    public void reinicillama(final Context c,final String minick){
+        new AsyncTask<JSONObject,JSONObject,JSONObject>(){
+            @Override
+            protected JSONObject doInBackground(JSONObject... params) {
+                ServerConexion conn=new ServerConexion();
+                JSONObject result=null;
+                try {
+                    result = conn.reseteallamada(minick);
+                }
+                catch(JSONException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return result;
+            }
+        }.execute();
+    }
 }
