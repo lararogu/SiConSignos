@@ -33,17 +33,35 @@
             android:text="Log out" />
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mostrar usuarios conectados"
-        android:gravity="center"
-        android:id="@+id/botonconectados"
-        android:layout_marginTop="40px"
-        android:onClick="muestraconectados"/>
+        android:id="@+id/layout_muestra_usuarios"
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-
-
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mostrar usuarios conectados"
+            android:gravity="center"
+            android:id="@+id/botonconectados"
+            android:layout_marginTop="40px"
+            android:layout_gravity="center"
+            android:onClick="muestraconectados"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_refrescar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="Refrescar"
+        android:onClick="muestraconectados"/>
+
+</LinearLayout>

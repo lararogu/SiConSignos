@@ -2,6 +2,8 @@ package es.tta.siconsignosapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,9 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +42,9 @@ public class Conectividad extends AppCompatActivity {
         startActivity(i);
     }
     public void muestraconectados(View v){
-        final LinearLayout layout_parent=(LinearLayout)findViewById(R.id.layoutconect);
-        layout_parent.removeView(findViewById(R.id.botonconectados));
+        final LinearLayout layout_parent=(LinearLayout)findViewById(R.id.layout_muestra_usuarios);
+        layout_parent.removeAllViews();
+        //layout_parent.removeView(findViewById(R.id.botonconectados));
         new AsyncTask<JSONObject,JSONObject,JSONObject>(){
             @Override
             protected JSONObject doInBackground(JSONObject... params) {
@@ -57,29 +62,58 @@ public class Conectividad extends AppCompatActivity {
             }
             @Override
             protected void onPostExecute(JSONObject result) {
+                TextView[] usu = new TextView[result.length()];
+                RelativeLayout[] relative=new RelativeLayout[result.length()];
+
+
                 try {
                     int length=result.length();
                     for(int i=0;i<length;i++) {
-                        int j=i+1;
-                        String index=Integer.toString(j);
-                        final JSONObject usuarioconectado=result.getJSONObject(index);
+                        int j = i + 1;
+                        String index = Integer.toString(j);
+                        final JSONObject usuarioconectado = result.getJSONObject(index);
 
-                        TextView usu=new TextView(getApplicationContext());
-                        usu.setText(usuarioconectado.getString("nombre") + " " + usuarioconectado.getString("apellido"));
-                        usu.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
-                                try {
-                                    SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
-                                    String minisk=pref.getString(Login_page.NISK, null);
-                                    llama(usuarioconectado.getString("nick"),minisk);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+
+                        SharedPreferences pref = getSharedPreferences("login_usu", MODE_PRIVATE);
+                        String nick = pref.getString(Login_page.NICK, null);
+                        if (nick.equals(usuarioconectado.getString("nick"))) {
+
+                        } else {
+
+                            relative[i] = new RelativeLayout(getApplicationContext());
+                            usu[i] = new TextView(getApplicationContext());
+
+                            usu[i].setText(usuarioconectado.getString("nombre") + " " + usuarioconectado.getString("apellido"));
+                            usu[i].setTextSize(30);
+                            usu[i].setTextColor(Color.BLUE);
+                            usu[i].setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    try {
+                                        SharedPreferences pref = getSharedPreferences("login_usu", MODE_PRIVATE);
+                                        String minisk = pref.getString(Login_page.NISK, null);
+                                        llama(usuarioconectado.getString("nick"), minisk);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
-                        });
-
-                        layout_parent.addView(usu);
+                            });
+                            //Creamos un RelativeLayout para mostrar cada usuario con la imagen asociada a su nombre
+                            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+                            usu[i].setLayoutParams(layoutParams);
+                            Display display = getWindowManager().getDefaultDisplay();
+                            Point size = new Point();
+                            display.getSize(size);
+                            int height = size.y;
+                            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (height / result.length()) - 60);
+                            relative[i].setLayoutParams(relativeParams);
+                            relative[i].setBackgroundResource(R.drawable.logousuario);
+                            relative[i].addView(usu[i]);
+                            layout_parent.addView(relative[i]);
+                        }
                     }
+                    Button button =(Button)findViewById(R.id.button_refrescar);
+                    button.setVisibility(View.VISIBLE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
