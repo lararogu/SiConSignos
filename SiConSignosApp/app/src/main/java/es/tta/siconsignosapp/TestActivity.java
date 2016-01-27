@@ -51,22 +51,33 @@ public class TestActivity extends AppCompatActivity {
         TextView tv=(TextView)findViewById(R.id.texto_niveles);
         tv.setText("Nivel basico:preguntas sencillas sobre el abecedario y palabras mas comunes\nNivel intermedio:Para acceder a este nivel deberas tener un 60% de aciertos en el nivel anterior\n" +
                 "Nivel avanzado:Para acceder a este nivel deberas tener un 70% de aciertos en el nivel anterior");
-
-
-    }
-    @Override
-    public void onResume(){
-        super.onResume();
         SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
         Boolean llama=prefe.getBoolean(MainActivity.Llamadaon, false);
         if(!llama) {
             compruebaSiContesta compu=new compruebaSiContesta();
             compu.temporiza(1000, TestActivity.this);
         }
+
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences prefe= getSharedPreferences("llamadas", MODE_PRIVATE);
+        SharedPreferences.Editor editor=prefe.edit();
+        editor.putBoolean(MainActivity.Llamadaon,false);
+        editor.commit();
+        compruebaSiContesta compu=new compruebaSiContesta();
+        compu.temporiza(1000, TestActivity.this);
         CambiaEstados reinilla=new CambiaEstados();
         SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
         String minick=pref.getString(Login_page.NICK, null);
         reinilla.reinicillama(TestActivity.this, minick);
+    }
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        compruebaSiContesta compu=new compruebaSiContesta();
+        compu.temporiza(1000, TestActivity.this);
     }
 
     public void basico(View v){

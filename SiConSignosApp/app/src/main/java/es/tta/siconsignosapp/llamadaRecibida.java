@@ -39,6 +39,8 @@ public class llamadaRecibida {
                         SharedPreferences.Editor editor=preferenciasllamada.edit();
                         editor.putBoolean(MainActivity.Llamadaon,false);
                         editor.commit();
+                        compruebaSiContesta compu=new compruebaSiContesta();
+                        compu.temporiza(1000, c);
                         SharedPreferences pref= c.getSharedPreferences("login_usu", c.MODE_PRIVATE);
                         String nick=pref.getString(Login_page.NICK, null);
                         deniegallamada(nick);
