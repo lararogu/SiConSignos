@@ -6,14 +6,8 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -125,13 +119,14 @@ public class Conectividad extends AppCompatActivity {
                             });
                             //Creamos un RelativeLayout para mostrar cada usuario con la imagen asociada a su nombre
                             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+                            layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+                            layoutParams.setMargins(50,15,15,15);
                             usu[i].setLayoutParams(layoutParams);
                             Display display = getWindowManager().getDefaultDisplay();
                             Point size = new Point();
                             display.getSize(size);
                             int height = size.y;
-                            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (height / result.length()) - 60);
+                            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (height / result.length()) - 100);
                             relative[i].setLayoutParams(relativeParams);
                             relative[i].setBackgroundResource(R.drawable.logocara);
                             relative[i].addView(usu[i]);
@@ -155,7 +150,7 @@ public class Conectividad extends AppCompatActivity {
                 ServerConexion conn = new ServerConexion();
                 JSONObject result = null;
                 try {
-                    result = conn.iniciaLlamada(nick,codchat);
+                    result = conn.iniciaLlamada(nick, codchat);
                 }
                 catch(JSONException e){
                     e.printStackTrace();
@@ -186,8 +181,9 @@ public class Conectividad extends AppCompatActivity {
                 }
             }
         }.execute();
-
-
-
+    }
+    public void deslogin(View v){
+        CambiaEstados cambia=new CambiaEstados();
+        cambia.desconecta(v, Conectividad.this);
     }
 }

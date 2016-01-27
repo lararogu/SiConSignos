@@ -40,7 +40,9 @@ public class compruebaSiContesta {
             protected void onPostExecute(JSONObject result) {
                 try {
                     String resul=result.getString("contesta");
-                    if(resul.equals("colgado")){
+                    SharedPreferences preferenciasllamada2= c.getSharedPreferences("llamadas", c.MODE_PRIVATE);
+                    Boolean cuel=preferenciasllamada2.getBoolean(MainActivity.cuelga,false);
+                    if(resul.equals("colgado") && !cuel){
                         SharedPreferences preferenciasllamada= c.getSharedPreferences("llamadas", c.MODE_PRIVATE);
                         SharedPreferences.Editor editor=preferenciasllamada.edit();
                         editor.putBoolean(MainActivity.contestado, true);

@@ -2,20 +2,16 @@ package es.tta.siconsignosapp;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     public final static String Llamadaon="es.tta.llamada";
     public final static String contestado="es.tta.contestado";
+    public final static String cuelga="es.tta.cuelga";
+    public final static String contandorllamando="es.tta.contadorllamando";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

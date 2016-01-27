@@ -5,16 +5,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -79,7 +75,6 @@ public class TestActivity extends AppCompatActivity {
         compruebaSiContesta compu=new compruebaSiContesta();
         compu.temporiza(1000, TestActivity.this);
     }
-
     public void basico(View v){
 
         datosTest.nivel="basico";

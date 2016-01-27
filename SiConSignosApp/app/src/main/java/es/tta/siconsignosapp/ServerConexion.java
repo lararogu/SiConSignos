@@ -1,6 +1,5 @@
 package es.tta.siconsignosapp;
 
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,7 +66,6 @@ public class ServerConexion {
         return result;
     }
     public JSONObject enviasugerencia(String asunto,String sugerencia) throws IOException, JSONException {
-
         JSONObject result=conn.getJson("anenviasugerencia.php?asunto=" + asunto + "&sugeren=" + sugerencia);
         return result;
     }

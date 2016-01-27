@@ -3,11 +3,7 @@ package es.tta.siconsignosapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.support.v4.app.FragmentTabHost;
 import android.view.View;
 
 public class Estudio extends AppCompatActivity {
@@ -58,6 +54,10 @@ public class Estudio extends AppCompatActivity {
     public void conectividad(View v){
         Intent i=new Intent(this,Conectividad.class);
         startActivity(i);
+    }
+    public void deslogin(View v){
+        CambiaEstados cambia=new CambiaEstados();
+        cambia.desconecta(v, Estudio.this);
     }
 
     public void abc(View v){

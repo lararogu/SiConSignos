@@ -1,13 +1,9 @@
 package es.tta.siconsignosapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +16,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class sugerencia extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,18 +24,24 @@ public class sugerencia extends AppCompatActivity {
     public void enviarsugerencia(View v)throws Exception{
         EditText asunto=(EditText)findViewById(R.id.asunto);
         EditText recom=(EditText)findViewById(R.id.recom);
-
         //Si ambos campos (LOGIN y PASSWD estan completados se comprueba si existe ese usuario
         if(!TextUtils.isEmpty(asunto.getText().toString())&&!TextUtils.isEmpty(recom.getText().toString())){
             final String asunt=asunto.getText().toString();
             final String recomendacion=recom.getText().toString();
+            String asuntoAEnviar=asunt.replace("\n","");
+            final String asuntobien=asuntoAEnviar.replace(" ","_");
+            String recomen=recomendacion.replace("\n", "");
+            final String recombien=recomen.replace(" ", "_");
+            Log.i("envia",asuntobien+" "+recombien);
             new AsyncTask<JSONObject,JSONObject,JSONObject>(){
                 @Override
                 protected JSONObject doInBackground(JSONObject... params) {
                     ServerConexion conn=new ServerConexion();
                     JSONObject result=null;
                     try {
-                        result = conn.enviasugerencia(asunt, recomendacion);
+                        Log.i("envia",asuntobien+" "+recombien);
+                        result = conn.enviasugerencia(asuntobien, recombien);
+                        Log.i("envia",asuntobien+" "+recombien);
                     }
                     catch(JSONException e){
                         e.printStackTrace();

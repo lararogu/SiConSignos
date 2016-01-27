@@ -7,26 +7,20 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -73,7 +67,10 @@ public class ABC extends AppCompatActivity {
         Intent i=new Intent(this,Conectividad.class);
         startActivity(i);
     }
-
+    public void deslogin(View v){
+        CambiaEstados cambia=new CambiaEstados();
+        cambia.desconecta(v, ABC.this);
+    }
 
     public void letra(View v){
         EditText palabra=(EditText)findViewById(R.id.letra);

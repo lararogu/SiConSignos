@@ -9,11 +9,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -25,11 +21,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ScrollView;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.TabHost.OnTabChangeListener;
-import android.util.Log;
 import android.widget.VideoView;
 
 import org.json.JSONException;
@@ -37,7 +30,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Inicio extends AppCompatActivity {
@@ -68,7 +60,7 @@ public class Inicio extends AppCompatActivity {
             compruebaSiContesta compu=new compruebaSiContesta();
             compu.temporiza(1000, Inicio.this);
         CambiaEstados reinilla=new CambiaEstados();
-        SharedPreferences pref= getSharedPreferences("login_usu",MODE_PRIVATE);
+        SharedPreferences pref= getSharedPreferences("login_usu", MODE_PRIVATE);
         String minick=pref.getString(Login_page.NICK, null);
         reinilla.reinicillama(Inicio.this, minick);
     }
@@ -89,27 +81,14 @@ public class Inicio extends AppCompatActivity {
         Intent i=new Intent(this,Estudio.class);
         startActivity(i);
     }
-    public void desconecta(View v){
-        CambiaEstados cambia= new CambiaEstados();
-        SharedPreferences pref= getSharedPreferences("login_usu", MODE_PRIVATE);
-        String minick=pref.getString(Login_page.NICK, null);
-        cambia.estadoDesconectado(Inicio.this,minick);
-        SharedPreferences.Editor editor=pref.edit();
-        editor.clear();
-        editor.commit();
-        SharedPreferences preferenciasllamada= getSharedPreferences("llamadas",MODE_PRIVATE);
-        SharedPreferences.Editor editor2=preferenciasllamada.edit();
-        editor2.clear();
-        editor2.commit();
-        Intent i=new Intent(this,Login_page.class);
-        startActivity(i);
-    }
-
     public void conectividad(View v){
         Intent i=new Intent(this,Conectividad.class);
         startActivity(i);
     }
-
+    public void deslogin(View v){
+        CambiaEstados cambia=new CambiaEstados();
+        cambia.desconecta(v,Inicio.this);
+    }
     public void manos(View v) {
         final Context context=this;
         //Recogemos la palabra o frase introducida por el usuario
